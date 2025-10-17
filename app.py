@@ -14,10 +14,10 @@ import urllib.request
 from pathlib import Path
 
 # --------------------- Model Auto-Download ------------------
-def download_model_from_release(model_name="best_model2.pt", version="v1.0.0"):
+def download_model_from_github(model_name="best_model2.pt"):
     """
-    Download model from GitHub releases if not present locally.
-    This enables Streamlit Cloud deployment without Git LFS.
+    Download model from GitHub repository (Git LFS).
+    This enables Streamlit Cloud deployment.
     """
     model_path = Path(model_name)
     
@@ -25,13 +25,13 @@ def download_model_from_release(model_name="best_model2.pt", version="v1.0.0"):
     if model_path.exists():
         return str(model_path)
     
-    # GitHub release URL
-    base_url = "https://github.com/UsmanAamir01/empathetic_chatbot/releases/download"
-    download_url = f"{base_url}/{version}/{model_name}"
+    # GitHub raw file URL (Git LFS pointer will auto-download actual file)
+    base_url = "https://github.com/UsmanAamir01/empathetic_chatbot/raw/main"
+    download_url = f"{base_url}/{model_name}"
     
-    st.info(f"📥 Downloading model from GitHub releases... ({model_name})")
+    st.info(f"📥 Downloading model from GitHub... ({model_name})")
     st.info(f"🔗 URL: {download_url}")
-    st.warning("⏱️ This may take 2-3 minutes (171 MB). Please wait...")
+    st.warning("⏱️ This may take 2-3 minutes (179 MB). Please wait...")
     
     try:
         # Create progress bar
@@ -77,14 +77,14 @@ def find_best_model():
         if os.path.exists(path):
             return path
     
-    # If no model found, try to download from GitHub releases
-    st.warning("⚠️ Model file not found locally. Attempting to download from GitHub releases...")
+    # If no model found, try to download from GitHub repository
+    st.warning("⚠️ Model file not found locally. Attempting to download from GitHub...")
     try:
-        return download_model_from_release("best_model2.pt", "v1.0.0")
+        return download_model_from_github("best_model2.pt")
     except:
         # Fallback to best_model.pt
         try:
-            return download_model_from_release("best_model.pt", "v1.0.0")
+            return download_model_from_github("best_model.pt")
         except:
             return None
 
