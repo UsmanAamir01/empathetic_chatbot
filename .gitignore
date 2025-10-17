@@ -61,7 +61,13 @@ word_freq_train.json
 
 # Evaluation outputs
 evaluation/
-*.json
+
+# JSON files (exclude specific ones, keep vocab.json)
+idx2word.json
+special_tokens.json
+word_freq_train.json
+training_history.json
+automatic_metrics.json
 
 # IDE
 .vscode/
