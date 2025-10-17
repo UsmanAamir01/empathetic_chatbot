@@ -1,0 +1,87 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# PyTorch
+*.pt
+*.pth
+*.ckpt
+checkpoints/
+*.pkl
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# Dataset files
+dataset/
+*.csv
+data/
+*.jsonl
+train.csv
+val.csv
+test.csv
+train_ids.jsonl
+val_ids.jsonl
+test_ids.jsonl
+train_pairs.csv
+val_pairs.csv
+test_pairs.csv
+idx2word.json
+special_tokens.json
+word_freq_train.json
+
+# Evaluation outputs
+evaluation/
+*.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Streamlit
+.streamlit/
+
+# Logs
+*.log
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Temporary files
+*.tmp
+*.temp
+~*
