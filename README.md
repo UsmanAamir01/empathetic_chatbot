@@ -281,8 +281,8 @@ Generated during training (not in repo):
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/empathetic-chatbot.git
-cd empathetic-chatbot
+git clone https://github.com/UsmanAamir01/empathetic_chatbot.git
+cd empathetic_chatbot
 ```
 
 ### Step 2: Create Virtual Environment
