@@ -30,8 +30,8 @@ ENV/
 env.bak/
 venv.bak/
 
-# PyTorch
-*.pt
+# PyTorch (model files now tracked with Git LFS)
+# *.pt files are tracked via Git LFS (see .gitattributes)
 *.pth
 *.ckpt
 checkpoints/
