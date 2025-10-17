@@ -32,6 +32,7 @@ Follow the instructions in the notebook to train your own model:
 ### Option 3: Contact Me
 
 If you need the pre-trained model files, please:
+
 - Open an issue in this repository
 - Or contact me directly (see Contact section in README)
 
@@ -42,11 +43,13 @@ If you need the pre-trained model files, please:
 To run the Streamlit app, you need:
 
 ### ✅ Included in Repository:
+
 - ✅ `vocab.json` - Vocabulary file (15K tokens)
 - ✅ `app.py` - Streamlit application
 - ✅ `empathetic-chatbot_imp.ipynb` - Training notebook
 
 ### ❌ Need to Obtain:
+
 - ❌ `best_model.pt` OR `best_model2.pt` - Trained model checkpoint
 
 ---
@@ -74,6 +77,7 @@ jupyter notebook empathetic-chatbot_imp.ipynb
 ## 📊 Model Specifications
 
 ### best_model2.pt (Latest)
+
 - **Epoch:** 6
 - **BLEU Score:** 18.5
 - **ROUGE-L:** 0.32
@@ -83,6 +87,7 @@ jupyter notebook empathetic-chatbot_imp.ipynb
 - **Parameters:** 11.5 million
 
 ### best_model.pt (v1)
+
 - **Epoch:** 5
 - **BLEU Score:** 17.8
 - **Size:** ~45 MB
@@ -147,6 +152,7 @@ git push
 ## 🤝 Sharing Models
 
 If you train an improved model, consider sharing it via:
+
 - GitHub Releases
 - [Hugging Face Hub](https://huggingface.co/models)
 - [Google Drive](https://drive.google.com) (share link in Issues)
@@ -173,6 +179,7 @@ A: Make sure you have either `best_model.pt` or `best_model2.pt` in the project 
 ## 📞 Support
 
 If you have issues obtaining or using the model files:
+
 1. Check the [Issues](https://github.com/UsmanAamir01/empathetic_chatbot/issues) page
 2. Open a new issue with the "model-files" label
 3. Contact via email (see README)

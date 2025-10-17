@@ -10,6 +10,55 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import matplotlib.pyplot as plt
+import urllib.request
+from pathlib import Path
+
+# --------------------- Model Auto-Download ------------------
+def download_model_from_release(model_name="best_model2.pt", version="v1.0.0"):
+    """
+    Download model from GitHub releases if not present locally.
+    This enables Streamlit Cloud deployment without Git LFS.
+    """
+    model_path = Path(model_name)
+    
+    # If model already exists, skip download
+    if model_path.exists():
+        return str(model_path)
+    
+    # GitHub release URL
+    base_url = "https://github.com/UsmanAamir01/empathetic_chatbot/releases/download"
+    download_url = f"{base_url}/{version}/{model_name}"
+    
+    st.info(f"📥 Downloading model from GitHub releases... ({model_name})")
+    st.info(f"🔗 URL: {download_url}")
+    st.warning("⏱️ This may take 2-3 minutes (171 MB). Please wait...")
+    
+    try:
+        # Create progress bar
+        progress_bar = st.progress(0)
+        status_text = st.empty()
+        
+        def show_progress(block_num, block_size, total_size):
+            downloaded = block_num * block_size
+            if total_size > 0:
+                percent = min(int((downloaded / total_size) * 100), 100)
+                progress_bar.progress(percent)
+                status_text.text(f"Downloaded: {downloaded / (1024*1024):.1f} MB / {total_size / (1024*1024):.1f} MB ({percent}%)")
+        
+        # Download with progress
+        urllib.request.urlretrieve(download_url, model_path, show_progress)
+        
+        progress_bar.empty()
+        status_text.empty()
+        st.success(f"✅ Model downloaded successfully: {model_name}")
+        
+        return str(model_path)
+        
+    except Exception as e:
+        st.error(f"❌ Failed to download model: {str(e)}")
+        st.error(f"Please download manually from: {download_url}")
+        st.info("💡 Place the downloaded file in the project root directory and refresh the page.")
+        st.stop()
 
 # --------------------- Paths & Defaults ---------------------
 IS_KAGGLE = os.path.exists("/kaggle/input")
@@ -17,15 +66,27 @@ DATA_DIR  = "/kaggle/working" if IS_KAGGLE else "."
 
 # Auto-detect model and vocab paths
 def find_best_model():
-    """Find best_model.pt in current dir or checkpoints subdirectory"""
+    """Find best_model.pt in current dir or checkpoints subdirectory, or download if missing"""
     candidates = [
         os.path.join(DATA_DIR, "best_model2.pt"),
+        os.path.join(DATA_DIR, "best_model.pt"),
         os.path.join(DATA_DIR, "checkpoints", "best_model2.pt"),
+        os.path.join(DATA_DIR, "checkpoints", "best_model.pt"),
     ]
     for path in candidates:
         if os.path.exists(path):
             return path
-    return None
+    
+    # If no model found, try to download from GitHub releases
+    st.warning("⚠️ Model file not found locally. Attempting to download from GitHub releases...")
+    try:
+        return download_model_from_release("best_model2.pt", "v1.0.0")
+    except:
+        # Fallback to best_model.pt
+        try:
+            return download_model_from_release("best_model.pt", "v1.0.0")
+        except:
+            return None
 
 def find_vocab():
     """Find vocab.json in current dir or checkpoints subdirectory"""
